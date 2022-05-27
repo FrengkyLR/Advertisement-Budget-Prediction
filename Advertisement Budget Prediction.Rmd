@@ -1,0 +1,185 @@
+---
+title: "Advertisement Budget Prediction"
+author: "Frengky"
+date: '2022-05-26'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+Marketing merupakan aspek yang sangat penting untuk menawarkan dan mengenalkan suatu produk pada calon pembeli, marketing dapat dilakukan melalui beberapa cara salah satunya adalah pemasaran melalui media, media sendiri merupakan platform yang digunakan setiap orang dalam mencari informasi serta menjadi sarana hiburan, sehingga pemasaran melalui media sangat membantu untuk menjangkau lebih banyak audiance.
+Permodelan ini digunakan untuk memprediksi besarnya sales yang didapat ketika sebuah produk diiklankan melalui beberapa media diantaranya TV,Radio dan Newspaper, tentunya pemasaran produk melalui media membutuhkan budget tertentu tergantung dari jenis media yang digunakan, sehingga melalui permodelan ini suatu sales yang didapat suatu perusahaan dapat diprediksi melalui  data historikal budget yang dikeluarkan untuk memasarkan sebuah produk, diharapkan melalui permodelan ini dapat membantu divisi marketing dalam memanajemen dan membuat strategi untuk menaikan efisiensi biaya pengiklanan.
+
+Membaca Data
+```{r cars}
+ads <- read.csv("Advertising Budget and Sales.csv")
+str(ads)
+
+```
+
+
+
+Merapikan nama kolom
+```{r}
+names(ads)[names(ads) == "Sales...."] <- "Sales"
+names(ads)[names(ads) == "TV.Ad.Budget...."] <- "TV.Budget"
+names(ads)[names(ads) == "Radio.Ad.Budget...."] <- "Radio.Budget"
+names(ads)[names(ads) == "Newspaper.Ad.Budget...."] <- "Newspaper.Budget"
+str(ads)
+```
+
+Menghapus kolom yang tidak diperlukan
+```{r pressure, echo=FALSE}
+library(dplyr)
+ads <- ads %>%
+  select(-X)
+
+```
+
+Cek Missing Data
+```{r}
+colSums(is.na(ads))
+```
+EDA
+```{r}
+library(GGally)
+ggcorr(ads, label = T)
+```
+Insight :
+TV.Budget memiliki korelasi tertinggi dengan Sales, artinya semakin banyak budget pengiklan yang dikeluarkan pada media TV maka sales yang didapat semakin tinggi juga, hal ini cukup efektif karena pengiklanan melalui TV cukup banyak menjangkau audience.
+
+```{r}
+library(ggplot2)
+hist(ads$Sales, main="Distribution of Sales", 
+     col="steelblue", freq=F, ylim = c(0,0.09), xlab = "Sales")
+lines(density(ads$Sales, na.rm = T), col="orange", lwd=3)
+```
+Insight :
+Distribusi Sales terbesar berada pada angka 10 hingga 15
+
+```{r}
+library(ggplot2)
+hist(ads$TV.Budget, main="Distribution of Radio Budget", 
+     col="steelblue", freq=F, ylim = c(0,0.09), xlab = "Radio Budget")
+lines(density(ads$Sales, na.rm = T), col="orange", lwd=3)
+```
+insight :
+Distribusi Budget Radio terbesar berada pada range 200-250
+Logs
+```{r}
+hist(log(ads$TV.Budget), main="Log Transformation: Distribution of Number of Reviews", 
+     col="steelblue", freq=F, ylim = c(0,0.9), xlab = "Log(Number of Reviews)")
+lines(density(log(ads$TV.Budget), na.rm = T), col="orange", lwd=3)
+```
+
+
+```{r}
+library(ggplot2)
+hist(ads$Radio.Budget, main="Distribution of Radio Budget", 
+     col="steelblue", freq=F, ylim = c(0,0.07), xlab = "Radio Budget")
+lines(density(ads$Radio.Budget, na.rm = T), col="orange", lwd=3)
+```
+insight :
+Distribusi Budget Radio cenderung fluktuatif
+
+```{r}
+hist(log(ads$Radio.Budget), main="Log Transformation: Distribution of Number of Reviews", 
+     col="steelblue", freq=F, ylim = c(0,0.4), xlab = "Log(Number of Reviews)")
+lines(density(log(ads$Radio.Budget), na.rm = T), col="orange", lwd=3)
+```
+
+
+
+```{r}
+library(ggplot2)
+hist(ads$Newspaper, main="Distribution of Newspaper Budget", 
+     col="steelblue", freq=F, ylim = c(0,0.09), xlab = "Newspaper Budget")
+lines(density(ads$Newspaper.Budget, na.rm = T), col="orange", lwd=3)
+```
+Insight :
+Distribusi Newspaper budget skew kekanan yang artinya rata-rata budget yang dikeluarkna melalui media ini relatif kecil
+
+Cross Validation, pembagian data train 70 % dan data test 30 %
+```{r}
+
+set.seed(123)
+samplesize <- round(0.7 * nrow(ads), 0)
+index <- sample(seq_len(nrow(ads)), size = samplesize)
+
+ads_train <- ads[index, ]
+ads_test <- ads[-index, ]
+```
+
+Model 1
+
+```{r}
+set.seed(123)
+ads_model<- lm(Sales ~ ., data = ads_train)
+
+summary(ads_model)
+```
+Model 2
+```{r}
+ads_model2<- lm(Sales ~TV.Budget+Radio.Budget, data = ads_train)
+summary(ads_model2)
+
+```
+Kesimpulan :
+Model 1 dan Model 2 tidak memiliki perbedaan yang signifikan, hal ini karena variabel Newspaper.Budget tidak banyak mempengaruhi model
+
+Interpertasi Model 2
+```{r}
+ads_pred <- predict(ads_model2, newdata = ads_test %>% select(-Sales))
+ads_test$prediksi <- ads_pred
+```
+
+Model Evaluasi
+```{r}
+#MAPE
+library(MLmetrics)
+MAPE(ads_test$prediksi, ads_test$Sales)*100
+```
+point :
+Hasil prediksi memiliki penyimpangan error sebesar 20 % dari data aktualnya,dapat disimpulkan model cukup buruk sehingga perlu ditingkatkan lagi
+
+
+Meningkatkan perfroma model dengan fitur log
+
+```{r}
+predictor_df <- ads_train %>% 
+  select(-Sales)
+
+# log transformation
+log_df <- cbind(predictor_df, log_Sales = log(ads_train$Sales))
+
+
+```
+```{r}
+model_log <- lm(log_Sales~., data = log_df)
+
+
+log_test <- ads_test %>% 
+  mutate(log_Sales = log(Sales))
+prediction_log <- predict(model_log, log_test)
+MAPE(prediction_log, log_test$log_Sales) * 100
+
+```
+Point:
+Penggunaan fitur log terbukti dapat menaikan akurasi model, penyimpangan nilai error pada prediksi turun kurang lebih 10 %
+
+
+Cek Multicorelitas
+```{r}
+library(car)
+vif(model_log)
+```
+Point:
+Tidak ada variabel yang bersifat multikorelitas hal ini dapat dilihat bahwa nilai vif tiap variabel < 10.
+
+
+Kesimpulan :
+Model dapat mempredikasi sales yang dihasilkan dari prediktor pembiayan iklan pada media Televisi,Radio dan Newspaper dengan penyimpangan error kurang lebih 10 % dari data aktualnya, model ini dapat ditingkatkan lagi dengan data input yang lebih besar lagi, semakin besar data  maka hasil permodelan juga akan semakin baik. 
+
