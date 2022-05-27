@@ -1,6 +1,9 @@
 # Advertisement-Budget-Prediction
 Marketing merupakan aspek yang sangat penting untuk menawarkan dan mengenalkan suatu produk pada calon pembeli, marketing dapat dilakukan melalui beberapa cara salah satunya adalah pemasaran melalui media, media sendiri merupakan platform yang digunakan setiap orang dalam mencari informasi serta menjadi sarana hiburan, sehingga pemasaran melalui media sangat membantu untuk menjangkau lebih banyak audiance.
 Permodelan ini digunakan untuk memprediksi besarnya sales yang didapat ketika sebuah produk diiklankan melalui beberapa media diantaranya TV,Radio dan Newspaper, tentunya pemasaran produk melalui media membutuhkan budget tertentu tergantung dari jenis media yang digunakan, sehingga melalui permodelan ini suatu sales yang didapat suatu perusahaan dapat diprediksi melalui  data historikal budget yang dikeluarkan untuk memasarkan sebuah produk, diharapkan melalui permodelan ini dapat membantu divisi marketing dalam memanajemen dan membuat strategi untuk menaikan efisiensi biaya pengiklanan.
+
+Exploratory Data Analyst
+
 ![SALES Dist](https://user-images.githubusercontent.com/101881998/170608997-577cce1a-a28b-444d-8abf-757ea6fccb64.PNG)
 
 Insight :
