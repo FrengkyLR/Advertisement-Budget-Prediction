@@ -11,6 +11,7 @@ Distribusi Sales tersebar terbanyak pada 10 $ hingga 15 $
 
 ![TV budget](https://user-images.githubusercontent.com/101881998/170609136-7396f1fc-2cdd-4017-a717-df95b0401ace.PNG)
 
+Insight :
 Distribusi budget dimedia TV yang dikeluarkan tersebar terbanyak pada budget 5$
 
 ![Radio Budget](https://user-images.githubusercontent.com/101881998/170609248-b8e81141-5aac-4d08-8dbe-b9874814c49c.PNG)
