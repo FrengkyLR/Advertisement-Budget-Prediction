@@ -7,7 +7,7 @@ Exploratory Data Analyst
 ![SALES Dist](https://user-images.githubusercontent.com/101881998/170608997-577cce1a-a28b-444d-8abf-757ea6fccb64.PNG)
 
 Insight :
-Distribusi Sales tersebar terbanyak pada 10$ hingga 15$
+Distribusi Sales tersebar terbanyak pada 10 $ hingga 15 $
 
 ![TV budget](https://user-images.githubusercontent.com/101881998/170609136-7396f1fc-2cdd-4017-a717-df95b0401ace.PNG)
 
