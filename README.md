@@ -16,12 +16,12 @@ Distribusi budget dimedia TV yang dikeluarkan tersebar terbanyak pada budget 5$
 ![Radio Budget](https://user-images.githubusercontent.com/101881998/170609248-b8e81141-5aac-4d08-8dbe-b9874814c49c.PNG)
 
 insight :
-Distribusi Budget Radio skew ke kiri yang artinya rata-rata budget yang dikeluarkan melalui media radio relatif besar
+Distribusi Budget Radio skew negatif yang artinya rata-rata budget yang dikeluarkan melalui media radio relatif besar
 
 ![Newspaper](https://user-images.githubusercontent.com/101881998/170609363-6b7177b4-0868-4382-bdcc-5da1f4964ec4.PNG)
 
 Insight :
-Distribusi Newspaper budget skew kekanan yang artinya rata-rata budget yang dikeluarkna melalui media Newspaper relatif kecil
+Distribusi Newspaper budget skew positif yang artinya rata-rata budget yang dikeluarkna melalui media Newspaper relatif kecil
 
 Conclusion :
 
