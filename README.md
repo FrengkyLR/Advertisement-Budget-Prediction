@@ -26,4 +26,4 @@ Distribusi Newspaper budget skew positif yang artinya rata-rata budget yang dike
 
 Conclusion :
 
-Model dapat mempredikasi sales yang dihasilkan dari prediktor pembiayan iklan pada media Televisi,Radio dan Newspaper dengan penyimpangan error kurang lebih 10 % dari data aktualnya, model ini dapat ditingkatkan lagi dengan data input yang lebih besar lagi, semakin besar data  maka hasil permodelan juga akan semakin baik. 
+Model pertama didapatkan hasil prediksi dilakukan evaluasi menggunakan MAPE dimana model memiliki penyimpangan error 20% terhadap data aktualnya sehingga dilakukan performansi model menggunakan fitur log dimana penyimpangan error yang didapat berkurang setengah dari hasil penyimpangan error pertama, sehingga pada hasil akhir model dapat mempredikasi sales yang dihasilkan dari prediktor pembiayan iklan pada media Televisi,Radio dan Newspaper dengan penyimpangan error kurang lebih 10 % dari data aktualnya, model ini dapat ditingkatkan lagi dengan data input yang lebih besar lagi, semakin besar data  maka hasil permodelan juga akan semakin baik. 
