@@ -16,8 +16,8 @@ insight :
 Distribusi Budget Radio skew ke kiri yang artinya rata-rata budget yang dikeluarkan melalui media radio relatif besar
 
 ![Newspaper](https://user-images.githubusercontent.com/101881998/170609363-6b7177b4-0868-4382-bdcc-5da1f4964ec4.PNG)
-Insight :
 
+Insight :
 Distribusi Newspaper budget skew kekanan yang artinya rata-rata budget yang dikeluarkna melalui media Newspaper relatif kecil
 
 Conclusion :
